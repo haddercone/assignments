@@ -9,4 +9,5 @@ class Animal {
   }
 }
 
-
+const obj = new Animal("Dog", 4)
+console.log(obj.describe())

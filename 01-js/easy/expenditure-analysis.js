@@ -6,7 +6,7 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  let ans = {};
+  const ans = {};
 
   for (const transaction of transactions) {
     const { category, price } = transaction;
