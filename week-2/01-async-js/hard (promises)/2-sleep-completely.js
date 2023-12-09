@@ -4,5 +4,18 @@
  */
 
 function sleep (seconds) {
-
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(), seconds*1000);
+    })
 }
+
+async function call() {
+    console.log("hi");
+    await sleep(1);
+    console.log("Call 1 seconds");
+    await sleep(2)
+    console.log("Call 2 seconds");
+    console.log("Hello");
+}
+
+call()
