@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const zod = require('zod');
 const jwtPassword = 'secret';
 
 
@@ -15,7 +16,24 @@ const jwtPassword = 'secret';
  */
 function signJwt(username, password) {
     // Your code here
+    const userSchema = zod.object({
+        username: zod.string().email(),
+        password: zod.string().length(6)
+    })
+
+    const data = userSchema.safeParse({
+        username: username,
+        password: password
+    })
+    
+    if(!data.success) return null;
+
+    return jwt.sign({
+        username: username,
+        password: password
+    }, jwtPassword)
 }
+
 
 /**
  * Verifies a JWT using a secret key.
@@ -27,6 +45,14 @@ function signJwt(username, password) {
  */
 function verifyJwt(token) {
     // Your code here
+    try {
+        jwt.verify(token, jwtPassword)
+        return true;
+    } catch (error) {
+        if(error){
+            return false;
+        }
+    }
 }
 
 /**
@@ -38,6 +64,8 @@ function verifyJwt(token) {
  */
 function decodeJwt(token) {
     // Your code here
+    const decode = jwt.decode(token, jwtPassword);
+    return decode ? true : false;
 }
 
 
