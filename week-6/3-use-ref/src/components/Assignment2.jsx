@@ -8,9 +8,9 @@ export function Assignment2() {
     const renderRef = useRef(0)
     const handleReRender = () => {
         // Update state to force re-render
-        renderRef.current += 1;
         forceRender(Math.random());
     };
+    renderRef.current += 1;
 
     return (
         <div>
